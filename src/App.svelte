@@ -1,34 +1,50 @@
 <script lang="ts">
-  import { Canvas } from "@threlte/core";
-  import Scene from "./Scene.svelte";
+  import "svelte-golden-layout/css/themes/goldenlayout-light-theme.css";
+  import GoldenLayout from "svelte-golden-layout";
 
+  import Viewport from "./Viewport.svelte";
   import Settings from "./Settings.svelte";
-  let autoRotate: boolean = false;
-  let enableDamping: boolean = true;
-  let rotateSpeed: number = 1;
-  let zoomToCursor: boolean = false;
-  let zoomSpeed: number = 1;
-  let minPolarAngle: number = 0;
-  let maxPolarAngle: number = Math.PI;
-  let enableZoom: boolean = true;
+
+  const components = { Viewport, Settings };
+
+  const layout = {
+    root: {
+      type: "row",
+      content: [
+        {
+          type: "component",
+          componentType: "Viewport",
+          componentState: {
+            someProp: 1,
+            anotherProp: 1,
+          },
+        },
+        {
+          type: "component",
+          componentType: "Settings",
+        },
+        {
+          type: "component",
+          componentType: "Settings",
+        },
+        {
+          type: "component",
+          componentType: "Settings",
+        },
+        {
+          type: "component",
+          componentType: "Settings",
+        },
+      ],
+    },
+  };
 </script>
 
 <div>
-  <Canvas>
-    <Scene />
-  </Canvas>
+  <GoldenLayout config={layout} let:componentType let:componentState>
+    <svelte:component this={components[componentType]} {...componentState} />
+  </GoldenLayout>
 </div>
-
-<Settings
-  bind:enableDamping
-  bind:autoRotate
-  bind:rotateSpeed
-  bind:zoomToCursor
-  bind:zoomSpeed
-  bind:minPolarAngle
-  bind:maxPolarAngle
-  bind:enableZoom
-/>
 
 <style>
   div {

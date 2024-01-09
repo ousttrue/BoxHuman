@@ -1,17 +1,17 @@
 <script lang="ts">
   import { Checkbox, Pane, ThemeUtils, Slider } from "svelte-tweakpane-ui";
 
-  export let autoRotate: boolean;
-  export let enableDamping: boolean;
-  export let rotateSpeed: number;
-  export let zoomToCursor: boolean;
-  export let zoomSpeed: number;
-  export let minPolarAngle: number;
-  export let maxPolarAngle: number;
-  export let enableZoom: boolean;
+  let autoRotate: boolean = false;
+  let enableDamping: boolean = true;
+  let rotateSpeed: number = 1;
+  let zoomToCursor: boolean = false;
+  let zoomSpeed: number = 1;
+  let minPolarAngle: number = 0;
+  let maxPolarAngle: number = Math.PI;
+  let enableZoom: boolean = true;
 </script>
 
-<Pane theme={ThemeUtils.presets.light} position="fixed" title="OrbitControls">
+<Pane theme={ThemeUtils.presets.light} position="inline" title="OrbitControls">
   <Checkbox bind:value={autoRotate} label="autoRotate" />
   <Checkbox bind:value={enableDamping} label="enableDamping" />
   <Checkbox bind:value={enableZoom} label="enableZoom" />
